@@ -17,19 +17,21 @@ function getPlayerSelection() {
   return choice;
 }
 
-let computerSelection = getComputerSelection();
-let playerSelection = getPlayerSelection();
-
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
-    return "Tie";
+    return "Tie " + playerSelection + " draw with " + computerSelection;
   } else if (
     (playerSelection === "rock" && computerSelection === "scissors") ||
     (playerSelection === "paper" && computerSelection === "rock") ||
     (playerSelection === "scissors" && computerSelection === "paper")
   ) {
-    return "player wins";
+    playerScore++;
+    return "player wins " + playerSelection + " beats " + computerSelection;
   } else {
-    return "computer wins";
+    computerScore++;
+    return (
+      "computer wins " + playerSelection + " lose with " + computerSelection
+    );
   }
 }
+console.log(playRound(getPlayerSelection(), getComputerSelection()));
