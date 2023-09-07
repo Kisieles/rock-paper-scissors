@@ -35,4 +35,20 @@ function playRound(playerSelection, computerSelection) {
     );
   }
 }
-console.log(playRound(getPlayerChoice(), getComputerChoice()));
+function score() {
+  if (computerScore > playerScore) {
+    return "computer whole wins";
+  } else if (computerScore < playerScore) {
+    return "player whole wins";
+  } else {
+    return "Tie";
+  }
+}
+function game() {
+  for (let i = 0; i < 5; i++) {
+    console.log(playRound(getPlayerChoice(), getComputerChoice()));
+  }
+  console.log(score());
+}
+
+game();
