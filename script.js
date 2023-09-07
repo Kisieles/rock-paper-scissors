@@ -1,7 +1,7 @@
 let computerScore = 0;
 let playerScore = 0;
 
-function getComputerSelection() {
+function getComputerChoice() {
   let choiceNum = Math.floor(Math.random() * 3);
   if (choiceNum == 0) {
     return "rock";
@@ -12,8 +12,9 @@ function getComputerSelection() {
   }
 }
 
-function getPlayerSelection() {
-  const choice = prompt("What is your choice?");
+function getPlayerChoice() {
+  let choice = prompt("What is your choice?");
+  choice = choice.toLowerCase();
   return choice;
 }
 
@@ -34,4 +35,4 @@ function playRound(playerSelection, computerSelection) {
     );
   }
 }
-console.log(playRound(getPlayerSelection(), getComputerSelection()));
+console.log(playRound(getPlayerChoice(), getComputerChoice()));
