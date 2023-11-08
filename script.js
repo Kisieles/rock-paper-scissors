@@ -12,10 +12,14 @@ function getComputerChoice() {
   }
 }
 
-function getPlayerChoice() {
-  let choice = prompt("What is your choice?");
-  choice = choice.toLowerCase();
-  return choice;
+function getPlayerChoice(id) {
+  if (id == 1) {
+    return "rock";
+  } else if (id == 2) {
+    return "paper";
+  } else if (id == 3) {
+    return "sicssors";
+  }
 }
 
 function playRound(playerSelection, computerSelection) {
@@ -37,18 +41,22 @@ function playRound(playerSelection, computerSelection) {
 }
 function score() {
   if (computerScore > playerScore) {
-    return "computer whole wins";
+    return "computer wins whole game";
   } else if (computerScore < playerScore) {
-    return "player whole wins";
+    return "player wins whole game";
   } else {
     return "Tie";
   }
 }
-function game() {
-  for (let i = 0; i < 5; i++) {
-    console.log(playRound(getPlayerChoice(), getComputerChoice()));
-  }
-  console.log(score());
-}
 
-game();
+const buttons = document.querySelectorAll("button");
+const resultDiv = document.getElementById("result");
+
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const playerChoice = getPlayerChoice(button.id);
+    const computerChoice = getComputerChoice();
+    const result = playRound(playerChoice, computerChoice);
+    resultDiv.textContent = result;
+  });
+});
