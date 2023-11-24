@@ -1,6 +1,12 @@
 let computerScore = 0;
 let playerScore = 0;
 
+function disableButton() {
+  buttons.forEach((btn) => {
+    btn.disabled = true;
+  });
+}
+
 function getComputerChoice() {
   let choiceNum = Math.floor(Math.random() * 3);
   if (choiceNum == 0) {
@@ -18,7 +24,7 @@ function getPlayerChoice(id) {
   } else if (id == 2) {
     return "paper";
   } else if (id == 3) {
-    return "sicssors";
+    return "scissors";
   }
 }
 
@@ -40,12 +46,12 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 function score() {
-  if (computerScore > playerScore) {
-    return "computer wins whole game";
-  } else if (computerScore < playerScore) {
-    return "player wins whole game";
+  if (computerScore === 5) {
+    return "Computer wins the whole game!";
+  } else if (playerScore === 5) {
+    return "Player wins the whole game!";
   } else {
-    return "Tie";
+    return `Player: ${playerScore} - Computer: ${computerScore}`;
   }
 }
 
@@ -57,6 +63,9 @@ buttons.forEach((button) => {
     const playerChoice = getPlayerChoice(button.id);
     const computerChoice = getComputerChoice();
     const result = playRound(playerChoice, computerChoice);
-    resultDiv.textContent = result;
+    resultDiv.innerHTML = `${result}<br>${score()}`;
+    if (playerScore === 5 || computerScore === 5) {
+      disableButton();
+    }
   });
 });
