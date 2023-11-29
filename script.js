@@ -1,19 +1,13 @@
 let computerScore = 0;
 let playerScore = 0;
 
-function disableButton() {
-  buttons.forEach((btn) => {
-    btn.disabled = true;
-  });
-}
-
 function showModal() {
   const modal = document.querySelector(".modal");
   modal.style.display = "block";
 }
 
-function refreshSite() {
-  location.reload(true);
+function handleClick() {
+  window.location.reload();
 }
 
 function getComputerChoice() {
@@ -66,7 +60,8 @@ function score() {
 
 const buttons = document.querySelectorAll("button");
 const resultDiv = document.getElementById("result");
-document.getElementById("refreshButton").addEventListener("click", refreshSite);
+const refreshBtn = document.getElementById("refreshButton");
+refreshBtn.addEventListener("click", handleClick);
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -76,7 +71,7 @@ buttons.forEach((button) => {
     resultDiv.innerHTML = `${result}<br>${score()}`;
     resultDiv.classList.add("centered-content");
     if (playerScore === 5 || computerScore === 5) {
-      showModal(), disableButton();
+      showModal();
     }
   });
 });
