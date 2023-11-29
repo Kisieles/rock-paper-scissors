@@ -7,6 +7,15 @@ function disableButton() {
   });
 }
 
+function showModal() {
+  const modal = document.querySelector(".modal");
+  modal.style.display = "block";
+}
+
+function refreshSite() {
+  location.reload(true);
+}
+
 function getComputerChoice() {
   let choiceNum = Math.floor(Math.random() * 3);
   if (choiceNum == 0) {
@@ -37,11 +46,11 @@ function playRound(playerSelection, computerSelection) {
     (playerSelection === "scissors" && computerSelection === "paper")
   ) {
     playerScore++;
-    return "player wins " + playerSelection + " beats " + computerSelection;
+    return "Player wins " + playerSelection + " beats " + computerSelection;
   } else {
     computerScore++;
     return (
-      "computer wins " + playerSelection + " lose with " + computerSelection
+      "Computer wins " + playerSelection + " lose with " + computerSelection
     );
   }
 }
@@ -57,6 +66,7 @@ function score() {
 
 const buttons = document.querySelectorAll("button");
 const resultDiv = document.getElementById("result");
+document.getElementById("refreshButton").addEventListener("click", refreshSite);
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -64,8 +74,9 @@ buttons.forEach((button) => {
     const computerChoice = getComputerChoice();
     const result = playRound(playerChoice, computerChoice);
     resultDiv.innerHTML = `${result}<br>${score()}`;
+    resultDiv.classList.add("centered-content");
     if (playerScore === 5 || computerScore === 5) {
-      disableButton();
+      showModal(), disableButton();
     }
   });
 });
